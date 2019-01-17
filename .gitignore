@@ -1,0 +1,9 @@
+/compiler/dist/
+/compiler/build/
+/compiler/nbproject/private/
+/compiler/nbproject/build-impl.xml
+*.bin
+*.exe
+*.o
+*.bin
+*.gch
