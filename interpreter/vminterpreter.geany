@@ -28,16 +28,21 @@ long_line_behaviour=1
 long_line_column=72
 
 [files]
-current_page=6
-FILE_NAME_0=0;None;0;EUTF-8;1;1;0;C%3A%5CUsers%5CWill%5CDocuments%5CGitHub%5Cvminterpreter%5Cchangelog.txt;0;4
-FILE_NAME_1=0;C++;0;EUTF-8;1;1;0;C%3A%5CUsers%5CWill%5CDocuments%5CGitHub%5Cvminterpreter%5Cfunctions.h;0;4
-FILE_NAME_2=0;C++;0;EUTF-8;1;1;0;C%3A%5CUsers%5CWill%5CDocuments%5CGitHub%5Cvminterpreter%5Cphysics.h;0;4
-FILE_NAME_3=0;None;0;EUTF-8;1;1;0;C%3A%5CUsers%5CWill%5CDocuments%5CGitHub%5Cvminterpreter%5Ctodo.txt;0;4
-FILE_NAME_4=0;C++;0;EUTF-8;1;1;0;C%3A%5CUsers%5CWill%5CDocuments%5CGitHub%5Cvminterpreter%5Cvmath.cpp;0;4
-FILE_NAME_5=232;C++;0;EUTF-8;1;1;0;C%3A%5CUsers%5CWill%5CDocuments%5CGitHub%5Cvminterpreter%5Cvmath.h;0;4
-FILE_NAME_6=3528;C++;0;EUTF-8;1;1;0;C%3A%5CUsers%5CWill%5CDocuments%5CGitHub%5Cvminterpreter%5Cmain.cxx;0;4
+current_page=4
+FILE_NAME_0=0;C++;0;EUTF-8;1;1;0;C%3A%5CUsers%5CWill%5CDocuments%5CGitHub%5CInordateVM%5Cinterpreter%5Cinclude%5Cfunctions.h;0;4
+FILE_NAME_1=0;C++;0;EUTF-8;1;1;0;C%3A%5CUsers%5CWill%5CDocuments%5CGitHub%5CInordateVM%5Cinterpreter%5Cinclude%5Cphysics.h;0;4
+FILE_NAME_2=0;C++;0;EUTF-8;1;1;0;C%3A%5CUsers%5CWill%5CDocuments%5CGitHub%5CInordateVM%5Cinterpreter%5Cinclude%5Cvmath.h;0;4
+FILE_NAME_3=676;C++;0;EUTF-8;1;1;0;C%3A%5CUsers%5CWill%5CDocuments%5CGitHub%5CInordateVM%5Cinterpreter%5Csrc%5Cvmath.cpp;0;4
+FILE_NAME_4=1035;C++;0;EUTF-8;1;1;0;C%3A%5CUsers%5CWill%5CDocuments%5CGitHub%5CInordateVM%5Cinterpreter%5Csrc%5Cmain.cpp;0;4
 
 [build-menu]
 EX_00_LB=_Execute
-EX_00_CM="./%e" ".\\test.bin" ".\\loop.bin"
+EX_00_CM="..\\bin\\interpreter.exe" "C:\\Users\\Will\\Documents\\GitHub\\InordateVM\\source\\setup.bin" "C:\\Users\\Will\\Documents\\GitHub\\InordateVM\\source\\loop.bin"
 EX_00_WD=
+C++FT_00_LB=_Compile
+C++FT_00_CM=g++ -Wall -I "..\\include" -c "main.cpp" -o "..\\obj\\main.o"
+C++FT_00_WD=
+filetypes=C++;
+C++FT_01_LB=_Build
+C++FT_01_CM=g++ -Wall -o "..\\bin\\interpreter.exe" "..\\obj\\main.o"
+C++FT_01_WD=

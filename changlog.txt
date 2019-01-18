@@ -1,0 +1,7 @@
+Version 1.0.1
+	- Interpreter: Basic physics object functionality complete
+	- Compiler:    Output file name deduced from input file name
+	- Interpreter: Directory structure reorganised
+
+Version 1.0.0 
+	- Initial commit

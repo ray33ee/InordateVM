@@ -166,7 +166,10 @@
                         <Bytecode>0113</Bytecode>
                 </Instruction>
 				
-				
+                <Instruction>
+                        <Signature>destroy_vp</Signature>
+                        <Bytecode>0114</Bytecode>
+                </Instruction>
 				
 				
         </Cluster>
@@ -282,7 +285,7 @@
 
                 
                 
-				<Instruction>
+                <Instruction>
                         <Signature>cmp_vi_li</Signature>
                         <Bytecode>0246</Bytecode>
                 </Instruction>
@@ -486,13 +489,41 @@
                         <Signature>store_vv_lf_lf</Signature>
                         <Bytecode>0340</Bytecode>
                 </Instruction>
+                
+
+                <Instruction>
+                        <Signature>force_vp_vf_vf</Signature>
+                        <Bytecode>0341</Bytecode>
+                </Instruction>
+
+                <Instruction>
+                        <Signature>force_vp_lf_lf</Signature>
+                        <Bytecode>0342</Bytecode>
+                </Instruction>
+                
+                <Instruction>
+                        <Signature>speed_vp_vf_vf</Signature>
+                        <Bytecode>0343</Bytecode>
+                </Instruction>
+                
+                <Instruction>
+                        <Signature>speed_vp_lf_lf</Signature>
+                        <Bytecode>0344</Bytecode>
+                </Instruction>
+                
+                
         </Cluster>
 		
 		<Cluster arg_count = "4">
 		
-				<Instruction>
+                <Instruction>
                         <Signature>new_vp_vf_vf_vf</Signature>
                         <Bytecode>0400</Bytecode>
+                </Instruction>
+                
+                <Instruction>
+                        <Signature>new_vp_lf_lf_lf</Signature>
+                        <Bytecode>0401</Bytecode>
                 </Instruction>
 		
 		</Cluster>

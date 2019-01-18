@@ -1,8 +1,3 @@
-
-Enforce type safety at compile time!!! Implicitly convert between float and int. Promote when converting int f
-
-Don't use pointers to registers, use pointers to blocks of memory. Is this needed?
-
 ==============
 Control Flow
 ==============

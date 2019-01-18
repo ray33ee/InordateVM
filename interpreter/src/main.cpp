@@ -34,6 +34,8 @@
 
 const int REGISTER_COUNT = 30;
 
+const int MAX_ARG_COUNT = 20;
+
 std::list<PhysicsObject>::iterator iteratorConvert(int num)
 {
 	return *(std::list<PhysicsObject>::iterator*)&num;
@@ -51,15 +53,13 @@ int start_machine(std::ifstream* file, int* registers, Flags* flags, std::list<P
 	//Get the op code pointed to by the program counter (PC)
 	while (true)
 	{
-		
-		
 		//Current bytecode
 		int fetch;
 		
 		//Buffer for arguments
-		int args[20];
+		int args[MAX_ARG_COUNT];
 		
-		list<PhysicsObject>::iterator it;
+		
 		
 		//Fetch opcode
 		file->read((char*)&fetch, sizeof(fetch));
@@ -68,8 +68,6 @@ int start_machine(std::ifstream* file, int* registers, Flags* flags, std::list<P
 			break;
 		
 		printf("code %x at %i\n", fetch, (int)file->tellg());
-		
-		printf("    flags: %i %i %i %i\n", file->good(), file->eof(), file->fail(), file->bad());
 		
 		
 		//Calculate number of arguments for this opcode
@@ -144,9 +142,8 @@ int start_machine(std::ifstream* file, int* registers, Flags* flags, std::list<P
 				instr_test_vv(args, registers, flags);
 				break;
 			case 0x0114:
-				it = iteratorConvert(registers[args[0]]);
-				
-				printf("    %f %f %f\n", it->getMass(), it->getXPos(), it->getYPos());
+				{list<PhysicsObject>::iterator it = iteratorConvert(registers[args[0]]);
+				phys->erase(it);}
 				break;
 				
 				
@@ -291,10 +288,37 @@ int start_machine(std::ifstream* file, int* registers, Flags* flags, std::list<P
 				instr_mul_vf_vf_lf(args, registers, flags);
 				break;
 				
+			case 0x0340:
+			
+				break;
+				
+			case 0x0341:
+				{list<PhysicsObject>::iterator it = iteratorConvert(registers[args[0]]);
+				it->setForce(Vector2f(hardConvert(registers[args[1]]), hardConvert(registers[args[2]])));}
+				break;
+			case 0x0342:
+				{list<PhysicsObject>::iterator it = iteratorConvert(registers[args[0]]);
+				it->setForce(Vector2f(hardConvert(args[1]), hardConvert(args[2])));}
+				break;
+			case 0x0343:
+				{list<PhysicsObject>::iterator it = iteratorConvert(registers[args[0]]);
+				it->setVelocity(Vector2f(hardConvert(registers[args[1]]), hardConvert(registers[args[2]])));}
+				break;
+			case 0x0344:
+				{list<PhysicsObject>::iterator it = iteratorConvert(registers[args[0]]);
+				it->setVelocity(Vector2f(hardConvert(args[1]), hardConvert(args[2])));}
+				break; 
 				
 				
 			case 0x0400:
-				registers[args[0]] = iteratorConvert(phys->insert(phys->end(), PhysicsObject(1.0f, Vector2f(0.4f, 0.0f))));
+				registers[args[0]] = iteratorConvert(phys->insert(phys->end(), 
+					PhysicsObject(hardConvert(registers[args[1]]), 
+						Vector2f(hardConvert(registers[args[2]]), hardConvert(registers[args[3]])))));
+				break;
+			case 0x0401:
+				registers[args[0]] = iteratorConvert(phys->insert(phys->end(), 
+					PhysicsObject(hardConvert(args[1]), 
+						Vector2f(hardConvert(args[2]), hardConvert(args[3])))));
 				break;
 				
 			default:
@@ -305,10 +329,10 @@ int start_machine(std::ifstream* file, int* registers, Flags* flags, std::list<P
 		
 		cout << "    registers: ";
 		
-		for (int i = 0; i < 4; ++i)
-			printf("%i ", registers[i]);
+		for (int i = 0; i < 6; ++i)
+			printf("%i (%g) ", registers[i], hardConvert(registers[i]));
 			
-		printf("%g\n", hardConvert(registers[4]));
+		printf("%g\n", hardConvert(registers[6]));
 			
 	}
 	
@@ -346,15 +370,12 @@ int main(int argc, char **argv)
 {
 	using namespace std;
 	
-	char* setup_path = argv[1];
-	char* loop_path = argv[2];
-	
-	int registers[30];
+	int registers[REGISTER_COUNT];
 	
 	list<PhysicsObject> phys_obj;
 	
-	ifstream setup(setup_path, ifstream::binary);
-	ifstream loop(loop_path, ifstream::binary);
+	ifstream setup(argv[1], ifstream::binary); //Get setup file
+	ifstream loop(argv[2], ifstream::binary); //Get loop file
 	
 	srand(time(nullptr));
 	
@@ -375,10 +396,13 @@ int main(int argc, char **argv)
 	
 	for (int i = 0; i < 10; ++i)
 	{
+		cout << "Physics Updates" << endl;
+		for (list<PhysicsObject>::iterator i = phys_obj.begin(); i != phys_obj.end(); i++)
+			i->update(1000);
+		
 		if (start_machine(&loop, registers, &flags, &phys_obj))
 			return 1;
 	}
-	
 	
 	
 	return 0;

@@ -13,16 +13,9 @@ import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import java.io.File;
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.net.URL;
-import java.nio.file.FileSystem;
-import java.nio.file.FileSystems;
+import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.Map;
 import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.ParserConfigurationException;
 import org.w3c.dom.DOMException;
 import org.w3c.dom.Document;
@@ -425,6 +418,18 @@ public class Vmcompiler {
         
         String line;
         
+        String output;
+        
+        Path p = Paths.get(args[0]);
+        
+        output = p.getRoot().toString();
+        
+        for (int i = 0; i < p.getNameCount() - 1; ++i)
+            output += p.getName(i).toString() + "\\";
+        
+        output += p.getFileName().toString().replaceAll("[\\.]v", ".bin");
+        
+        
         if (args.length == 0)
         {
             System.out.println("ERROR: No command line argument supplied.");
@@ -686,7 +691,9 @@ public class Vmcompiler {
         
         System.out.println("Second parse complete.");
         
-        OutputStream outStream = new FileOutputStream(".\\code.bin");
+        System.out.println("Output file: " + output);
+        
+        OutputStream outStream = new FileOutputStream(output);
         
         for (Integer i : binary)
             outStream.write(toArray(i));

@@ -11,6 +11,14 @@ InordateVM is a minimalistic and complete game-oriented Virtual Machine implemen
   - Write C compiler for Inordate
   - Cleanup interpreter folder with obj, src, header and bin folders.
   - Create makefile for interpterer 
+  - Combine and sync all readme, todo and changelog docs
+  - Compiler: Test to make sure variable numbers do not exceed limit
+  - Interpreter: How do I pass parameters, on the stack or with registers? what if i need to preserve registers on the stack>
+  - Interpreter: Which math functions should set the flags? Integer only, or floating too?
+  - Interpreter: Add pow and div functions
+  - Interpreter: Verify cmp, sub, mul, div, test and pow functions
+  - Interpreter: Create class and implement physics objects, update on each loop, store in linked list etc.
+
 
 # Explination
 

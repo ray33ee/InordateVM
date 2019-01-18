@@ -1,2 +1,0 @@
-
- - Test to make sure variable index is not over register limit

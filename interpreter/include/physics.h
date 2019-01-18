@@ -2,6 +2,8 @@
 #include <limits>
 #include "vmath.h"
 
+#include <iostream>
+
 class PhysicsObject
 {
 private:
@@ -33,14 +35,14 @@ public:
 		_force = force;
 	}
 	
-	void addForce(const Vector2f &force)
-	{
-		_force += force;
-	}
-	
 	void setVelocity(const Vector2f &vel)
 	{
 		_velocity = vel;
+	}
+	
+	void addForce(const Vector2f &force)
+	{
+		_force += force;
 	}
 	
 	void setFriction(float friction)
@@ -50,9 +52,14 @@ public:
 	
 	void update(int elapsed)
 	{
+		using namespace std;
+		
 		_acceleration = _force / _mass;
 		_velocity += _acceleration * elapsed / 1000.0f;
 		_position += _velocity * elapsed / 1000.0f;
+		
+		cout << "    Mass: " << _mass << ". Acceleration: " << _acceleration.x << ", " << _acceleration.y << ". Velocity: "
+			 << _velocity.x << ". " << _velocity.y << ". Position: "<< _position.x << ", " << _position.y << endl;
 	}
 	
 	float getMass() const { return _mass; }
